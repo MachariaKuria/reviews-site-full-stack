@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns.th="http://www.thymeleaf.org">
+<head>
+	<title>A Category</title>
+</head>
+<body>
+	<h1>A Single Review Category</h1>
+	
+	<div th:each = "category: ${categories}">
+	<em>Below are reviews categories of some spectacular travel destinations in Kenya.</em>	
+	    <p>Title: <span th:text = "${category.title}"></span></p>
+		<p>Category rating: <span th:text = "${category.rating}"></span></p>
+		<p>Category basis: <span th:text = "${category.basis}"></span></p>
+		<a href="http://localhost:8080/show-categories">Back to Categories</a>
+	</div>
+
+</body>
+</html>

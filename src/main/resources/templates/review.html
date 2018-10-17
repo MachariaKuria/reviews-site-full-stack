@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns.th="http://www.thymeleaf.org">
+<head>
+	<title>A Review</title>
+</head>
+<body>
+	<h1>A Single Hotel Review</h1>
+	
+	<div th:each = "review: ${reviews}">
+	<em>Below are reviews of some spectacular travel destinations in Kenya.</em>	
+	    <p>Destination: <span th:text = "${review.name}"></span></p>
+		<p>Review Category: <span th:text = "${review.category}"></span></p>
+		<p>Review: <span th:text = "${review.title}"></span></p>
+		<img th:src= "${review.imgUrl}" ></img>
+		<p>This destination description is as follows:</p>
+		<em><p> <span th:text = "${review.description}"></span></p></em>
+		<a href="http://localhost:8080/show-reviews">Back to home</a>
+	</div>
+
+</body>
+</html>
