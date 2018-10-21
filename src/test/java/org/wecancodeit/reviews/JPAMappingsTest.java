@@ -31,7 +31,7 @@ public class JPAMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadReview() {
-		Review review = reviewRepo.save(new Review(1L,"White Rhino","image url","Nyeri, Kenya"));
+		Review review = reviewRepo.save(new Review("Accomodation","5","Basis"));
 		long reviewId = review.getId();
 		
 		entityManager.flush();
@@ -39,15 +39,15 @@ public class JPAMappingsTest {
 		
 		Optional<Review> result = reviewRepo.findById(reviewId);
 		review = result.get();
+		assertThat(review.getTitle(),is("Accomodation"));
+		assertThat(review.getRating(),is("5"));
+		assertThat(review.getBasis(),is("Basis"));
 		
-		assertThat(review.getName(),is("White Rhino"));
-		assertThat(review.getImgUrl(),is("image url"));
-		assertThat(review.getLocation(),is("Nyeri, Kenya"));
 	}
 
 	@Test
 	public void shouldGenerateReviewId() {
-		Review review = reviewRepo.save(new Review(1L,"title","image url","Nyeri, Kenya"));
+		Review review = reviewRepo.save(new Review("Accomodation","Rating","Basis"));
 		long reviewId = review.getId();
 		
 		entityManager.flush();
@@ -59,7 +59,7 @@ public class JPAMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadCategory() {
-		Category category = new Category("Accomodation","5","Room Service");
+		Category category = new Category("Beach Hotel","image url","Nyeri, Kenya");
 		category = categoryRepo.save(category);
 		long categoryId = category.getId();
 
@@ -68,9 +68,9 @@ public class JPAMappingsTest {
 		
 		Optional<Category> result = categoryRepo.findById(categoryId);
 		category = result.get();
-		assertThat(category.getTitle(),is("Accomodation"));
-		assertThat(category.getRating(),is("5"));
-		assertThat(category.getBasis(),is("Room Service"));
+		assertThat(category.getName(),is("Beach Hotel"));
+		assertThat(category.getImgUrl(),is("image url"));
+		assertThat(category.getLocation(),is("Nyeri, Kenya"));
 	
 	}
 	
@@ -78,10 +78,10 @@ public class JPAMappingsTest {
 	@Test
 	public void shouldEstablishReviewToCategoryRelationship() {
 		
-		Review hotel1 = reviewRepo.save(new Review(1L,"White Rhino","img Url","Nyeri Kenya"));
-		Review hotel2 = reviewRepo.save(new Review(1L,"Mara Sopa","img Url","Oololoo Hills Kenya"));
+		Review hotel1 = reviewRepo.save(new Review("Accomodation","***","No of Rooms"));
+		Review hotel2 = reviewRepo.save(new Review("Accomodation","***","No of Rooms"));
 		
-		Category category = new Category("Accomodation","***","No of Beds", hotel1, hotel2);
+		Category category = new Category("Beach Hotel","image Url","Mombasa, Kenya", hotel1, hotel2);
 		category = categoryRepo.save(category);
 		long categoryId = category.getId();
 
@@ -96,31 +96,31 @@ public class JPAMappingsTest {
 	
 	@Test
 	public void shouldFindCategoriesForReview() {
-		Review hotel3 = reviewRepo.save(new Review(1L,"Marriot","img Url","New York, NY"));
+		Review hotel3 = reviewRepo.save(new Review("Rooms","***","Cleanliness"));
 		
-		Category food = categoryRepo.save(new Category("Food","*****","Variety", hotel3));
-		Category room = categoryRepo.save(new Category("Bathrooms","*****","Cleanliness", hotel3));
+		Category category1 = categoryRepo.save(new Category("Beach Hotel","image Url","Mombasa, Kenya", hotel3));
+		Category category2 = categoryRepo.save(new Category("Mountain Hotel","image Url","Nyeri, Kenya", hotel3));
 		
 		entityManager.flush();
 		entityManager.clear();
 		
 		Collection<Category> categoriesForReview = categoryRepo.findByReviewsContains(hotel3);
-		assertThat(categoriesForReview, containsInAnyOrder(food,room));
+		assertThat(categoriesForReview, containsInAnyOrder(category1,category2));
 	}
 	
 	@Test
 	public void shouldFindCategoryForReviewId() {
-		Review hotel4 = reviewRepo.save(new Review(17L,"Motel 6","img Url","Newark, Ohio"));
+		Review hotel4 = reviewRepo.save(new Review("Rooms","***","Cleanliness"));
 		long reviewId = hotel4.getId();
 		
-		Category food = categoryRepo.save(new Category("Food","*****","Variety", hotel4));
-		Category room = categoryRepo.save(new Category("Bathrooms","*****","Cleanliness", hotel4));		
+		Category category1 = categoryRepo.save(new Category("Beach Hotel","image Url","Mombasa, Kenya", hotel4));
+		Category category2 = categoryRepo.save(new Category("Mountain Hotel","image Url","Nyeri, Kenya", hotel4));		
 
 		entityManager.flush();
 		entityManager.clear();
 		
 		Collection<Category> categoriesForReview = categoryRepo.findByReviewsId(reviewId);
-		assertThat(categoriesForReview, containsInAnyOrder(food,room));		
+		assertThat(categoriesForReview, containsInAnyOrder(category1,category2));		
 		
 		
 	}

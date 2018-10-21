@@ -1,0 +1,43 @@
+body{
+	color: #004000;
+	background-color: yellow; 
+}
+
+  nav {
+  display: flex;
+  flex-flow: row; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 2em;
+  justify-content: center;
+  background: #c0c0c0;
+  }
+  
+  nav a {
+  padding: 0.5em 2em;
+  text-decoration: none;
+  color: black;
+  }
+  
+  nav a:hover {
+  background: rgb(23, 83, 196);
+    transition-duration: 800ms;
+  }
+  
+  img {
+    float: none;
+    width: 33%;
+    padding-left: 2rem;
+
+}
+
+	.reviews {
+	padding-left: 2.5rem;
+	}
+	
+	div .a {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+}

@@ -2,20 +2,21 @@
 <html xmlns.th="http://www.thymeleaf.org">
 <head>
 	<title>A Review</title>
+	<link href="/styles.css" rel="stylesheet">
 </head>
 <body>
 	<h1>A Single Hotel Review</h1>
 	
+
 	<div th:each = "review: ${reviews}">
 	<em>Below are reviews of some spectacular travel destinations in Kenya.</em>	
-	    <p>Destination: <span th:text = "${review.name}"></span></p>
-		<p>Review Category: <span th:text = "${review.category}"></span></p>
-		<p>Review: <span th:text = "${review.title}"></span></p>
-		<img th:src= "${review.imgUrl}" ></img>
-		<p>This destination description is as follows:</p>
-		<em><p> <span th:text = "${review.description}"></span></p></em>
-		<a href="http://localhost:8080/show-reviews">Back to home</a>
+	    <p>Title: <span th:text = "${review.title}"></span></p>
+		<p>Review Rating: <span th:text = "${review.rating}"></span></p>
+		<p>Review Basis: <span th:text = "${review.basis}"></span></p>
 	</div>
-
+	<nav>
+	<a href="http://localhost:8080/show-categories">Back to Categories</a>
+	<a href="http://localhost:8080/show-reviews">Back to Reviews</a>		
+	</nav>
 </body>
 </html>

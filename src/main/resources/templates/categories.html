@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html xmlns.th="http://www.thymeleaf.org">
+
 <head>
-	<title>Reviews</title>
+	<title>Categories</title>
 	<link href="/styles.css" rel="stylesheet">
 </head>
 <body>
-<h1>Welcome to Macharia's Reviews site</h1>
+<h1>Welcome to Macharia's Categories site</h1>
 
-
-	<div th:each="review: ${reviews}">
+<h2>Below are categories for some travel destinations:</h2>
+	<div th:each="category: ${categories}">
 		<li> 
-		<a th:href="@{/review(id=${review.id})}" th:text="${review.title}"></a>			
+		<a th:href="@{/category(id=${category.id})}" th:text="${category.name}"></a>			
 		</li>
+		
+		<span class="ui_bubble_rating bubble_30" alt="3 of 5 bubbles" data-clicksource="BubbleRatingTrackingOnly"></span>
 	</div>
 	<nav>
 	<a href="http://localhost:8080/show-categories">Back to Categories</a>

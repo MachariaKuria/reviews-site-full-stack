@@ -14,44 +14,45 @@ public class Review {
 	@GeneratedValue
 	private long id;
 	
-
-	private String name;
-	private String imgUrl;
-	private String location;
-
-	@ManyToMany(mappedBy = "reviews")
+	private String title;
+	private String rating;
+	private String basis;
+	
+	@ManyToMany(mappedBy="reviews")
 	private Collection<Category> categories;
 	
-	public Long getId() {
-
+	public long getId() {
+		
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+
+		return title;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public String getRating() {
+
+		return rating;
 	}
-	public String getLocation() {
-		return location;
+
+	public String getBasis() {
+
+		return basis;
 	}
-	
-	public Collection<Category> getCategories(){
+
+	public Collection<Category>getCategories(){
 		return categories;
 	}
 	
-	public Review() {
+	public Review () {
 		
 	}
-
-	public Review(long id, String name, String imgUrl, String location) {
-		this.id = id;
-		this.name = name;
-		this.imgUrl = imgUrl;
-		this.location = location;
-
+	
+	public Review(String title, String rating, String basis) {
+		this.title = title;
+		this.rating = rating;
+		this.basis = basis;
 	}
 
 	@Override
@@ -75,6 +76,4 @@ public class Review {
 			return false;
 		return true;
 	}
-
-	
 }

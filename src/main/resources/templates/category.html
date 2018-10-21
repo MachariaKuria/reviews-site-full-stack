@@ -2,17 +2,33 @@
 <html xmlns.th="http://www.thymeleaf.org">
 <head>
 	<title>A Category</title>
+	<link href="/styles.css" rel="stylesheet">
 </head>
 <body>
-	<h1>A Single Review Category</h1>
+	<h1>A Single Category Review</h1>
 	
-	<div th:each = "category: ${categories}">
-	<em>Below are reviews categories of some spectacular travel destinations in Kenya.</em>	
-	    <p>Title: <span th:text = "${category.title}"></span></p>
-		<p>Category rating: <span th:text = "${category.rating}"></span></p>
-		<p>Category basis: <span th:text = "${category.basis}"></span></p>
-		<a href="http://localhost:8080/show-categories">Back to Categories</a>
+	<div th:each = "category: ${categories}" >
+	<em>Below are category reviews of some spectacular travel destinations in Kenya.</em>	
+	
+	    <p>Destination: <span th:text = "${category.name}"></span></p>
+		<img th:src= "${category.imgUrl}" ></img>
+		<p>Location: <span th:text = "${category.location}"></span></p>
+	<div class="a">
+	<p><strong>This hotel's reviews are as shown below:</strong></p>
 	</div>
-
+	<div th:each = "review: ${category.reviews}" class="reviews">
+	<br />
+		<p>Title: <span th:text = "${review.title}"></span></p>
+		<p>Review Rating: <span th:text = "${review.rating}"></span></p>
+		<p>Review Basis: <span th:text = "${review.basis}"></span></p>
+		
+	</div>
+	</tr>
+</div>
+	<nav>
+	<a href="http://localhost:8080/show-categories">Back to Categories</a>
+	<a href="http://localhost:8080/show-reviews">Back to Reviews</a>		
+	</nav>
+		
 </body>
 </html>

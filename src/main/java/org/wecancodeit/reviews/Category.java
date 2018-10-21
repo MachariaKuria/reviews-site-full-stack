@@ -9,55 +9,51 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-
-
 @Entity
 public class Category {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
 
+	private String name;
+	private String imgUrl;
+	private String location;
 	
-	private String title;
-	private String rating;
-	private String basis;
-
 	@ManyToMany
 	private Collection<Review> reviews;
+	
+	public Category() {
+		
+	}
+	
 
 	public long getId() {
 		return id;
 	}
 
-	public String getTitle() {
-		
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public String getRating() {
-		return rating;
+	public String getImgUrl() {
+
+		return imgUrl;
 	}
 
-	public String getBasis() {
-		return basis;
+	public String getLocation() {
+		return location;
 	}
 
-	
 	public Collection<Review> getReviews() {
 		return reviews;
 	}
 
-	public Category() {
-		
-	}
-	public Category(String title, String rating, String basis, Review...reviews) {
-
-		this.title = title;
-		this.rating = rating;
-		this.basis = basis;
-		this.reviews = new HashSet<>(Arrays.asList(reviews));
-
+	public Category(String name, String imgUrl, String location, Review...reviews) {
+		this.name = name;
+		this.imgUrl = imgUrl;
+		this.location = location;
+		this.reviews = new HashSet<>(Arrays.asList(reviews));	
 	}
 
 	@Override
@@ -81,6 +77,4 @@ public class Category {
 			return false;
 		return true;
 	}
-
-	
 }
