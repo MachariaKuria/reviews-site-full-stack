@@ -1,8 +1,9 @@
 body{
 	color: #004000;
-	background-color: yellow; 
+  background-color: yellow; 
+  padding: 2em;
+  max-width: 800px;
 }
-
   nav {
   display: flex;
   flex-flow: row; 
@@ -25,6 +26,11 @@ body{
   background: rgb(23, 83, 196);
     transition-duration: 800ms;
   }
+
+  nav #review-img {
+    max-height: 100%;
+    max-width: 100%;
+  }
   
   img {
     float: none;
@@ -41,3 +47,8 @@ body{
     text-decoration-line: underline;
     text-decoration-style: solid;
 }
+
+div .b {
+  text-decoration-style: solid;
+}
+
