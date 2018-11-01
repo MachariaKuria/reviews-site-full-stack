@@ -6,54 +6,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Review {
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@Id
-	@GeneratedValue
-	private long id;
-	
-	private String title;
-	private String rating;
-	private String basis;
-	
-	@ManyToMany(mappedBy="reviews")
-	private Collection<Category> categories;
-	
-	public long getId() {
-		
-		return id;
-	}
+    private String reviewType;
 
-	public String getTitle() {
+    @ManyToMany(mappedBy="review")
+    private Collection<Hotel> hotels;
 
-		return title;
-	}
+    public long getId(){
+    return id;
+    }
 
-	public String getRating() {
+    public String getReviewType(){
+    return reviewType;
+    }
 
-		return rating;
-	}
+    public Collection<Hotel> getHotels(){
+        return hotels;
+    }
 
-	public String getBasis() {
 
-		return basis;
-	}
+    //default constructor
+    public Review () {
 
-	public Collection<Category>getCategories(){
-		return categories;
-	}
-	
-	public Review () {
-		
-	}
-	
-	public Review(String title, String rating, String basis) {
-		this.title = title;
-		this.rating = rating;
-		this.basis = basis;
-	}
+    }
+    public Review (String reviewType){
+
+    this.reviewType = reviewType;
+ 
+    }
 
 	@Override
 	public int hashCode() {
@@ -76,4 +64,5 @@ public class Review {
 			return false;
 		return true;
 	}
+
 }

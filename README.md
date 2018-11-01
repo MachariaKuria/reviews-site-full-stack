@@ -13,3 +13,4 @@ e).Allowed for a description/content/body longer than 255 characters.
 f).Updated your view (templates/html/css) to have a page that lists review categories, each of which links to the (details) page for a specific category.
 h).Created page that lists the reviews for a chosen category, each of which links to the (details) page for a specific review.
 i).each review detail page has a link to the page for its category.
+# reviews-site-full-stack-ajax

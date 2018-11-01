@@ -3,47 +3,47 @@ package org.wecancodeit.reviews;
 import java.util.Optional;
 
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class CategoryController {
-	
-	
-	@Resource
-	CategoryRepository categoryRepo;
+public class HotelController {
 	
 	@Resource
-	ReviewRepository reviewRepo;
+	HotelRepository hotelRepo;
+	
+	@Resource
+	private ReviewRepository reviewRepo;
 
-	@RequestMapping("/category")
-	public String findOneCategory(@RequestParam(value="id")long id, Model model) throws CategoryNotFoundException {
+	@RequestMapping("/hotel")
+	public String findOneHotel(@RequestParam(value="id")long id, Model model) throws HotelNotFoundException {
 		
-		Optional<Category> category = categoryRepo.findById(id);
-		
-		if(category.isPresent()) {
-			model.addAttribute("categories", category.get());
-			return "category";
+		Optional<Hotel> hotel = hotelRepo.findById(id);
+	
+		if(hotel.isPresent()) {
+			model.addAttribute("hotels", hotel.get());
+			return "hotel";
 		}
-		throw new CategoryNotFoundException();
+		throw new HotelNotFoundException();
 	}
 
-	@RequestMapping("/show-categories")
-	public String findAllCategories(Model model) {
+	@RequestMapping("/show-hotels")
+	public String findAllHotels(Model model) {
+		model.addAttribute("hotels",hotelRepo.findAll());
+		return ("hotels");
 		
-		model.addAttribute("categories", categoryRepo.findAll());
-		return ("categories");
 	}
-
+	
 	@RequestMapping("/review")
 	public String findOneReview(long id, Model model) throws ReviewNotFoundException {
 		Optional<Review> review = reviewRepo.findById(id);
 		
 		if(review.isPresent()) {
 			model.addAttribute("reviews", review.get());
-			model.addAttribute("categories", categoryRepo.findByReviewsContains(review.get()));
+			model.addAttribute("hotels", hotelRepo.findByReviewsContains(review.get()));
 			return "review";
 		}
 		throw new ReviewNotFoundException();
@@ -55,7 +55,7 @@ public class CategoryController {
 		model.addAttribute("reviews", reviewRepo.findAll());
 		return ("reviews");
 		
-	}
-	
+	}	
+
 	
 }

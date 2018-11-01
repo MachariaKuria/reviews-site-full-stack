@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns.th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>A Review</title>
@@ -16,22 +16,46 @@
 	It makes them feel better to post it online.
 	<p>
 		Additionally, review sites help your potential customers weed out their choices. Reviews help them decide if they’re
-		going to stop into your restaurant or the competition’s.
-		Public opinion has taken over the Internet, and if you aren’t currently perusing review sites, it’s time to find out
+		going to stop into your restaurant or the competitions.
+		Public opinion has taken over the Internet, and if you are not currently perusing review sites, it’s time to find out
 		what your customers think.
 	</p>
 	<div class="b">
 		<em>Below you'll find a single review.</em>
 	</div>
 
-	<div th:each="review: ${reviews}">
+	<div>
 
 		<p>Title: <span th:text="${review.title}"></span></p>
 		<p>Review Rating: <span th:text="${review.rating}"></span></p>
 		<p>Review Basis: <span th:text="${review.basis}"></span></p>
 
 	</div>
+	<div class="add-comment">
+		<form method="POST">
+			<section>
+				<label>Enter your name: </label>
+			<p><input type="text" name="author" /></p>	
+			</section>
+			<section>
+				<label>What do you think of this review? </label>
+				<p><input type="text" name="content" /></p>
+			</section>
+			<section>
+				<input type="hidden" th:value="${reviews.id}" name="reviewId"/>
+			</section>
+			<section>
+				<button th:formaction = "@{/add-comment}">Add Comment</button>
+			</section>
+		</form>
+		<article>
+		<div th:each="comment: ${categories.comments}">
+			<h5><span th:text="${comment.author}">Commenter</span> says...</h5>
+			<p th:text="${comment.content}"></p>
 
+		</div>
+	</article>
+	</div>
 	<nav>
 		<a href="http://localhost:8080/show-categories">Categories</a>
 		<a href="http://localhost:8080/show-reviews">Reviews</a>

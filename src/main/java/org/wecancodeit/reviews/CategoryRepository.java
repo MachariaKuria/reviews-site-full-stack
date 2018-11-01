@@ -1,13 +1,14 @@
 package org.wecancodeit.reviews;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
-	Collection<Category> findByReviewsContains(Review review);
+	Collection<Category> findByTypeContains(String review);
 	
-	Collection<Category> findByReviewsId(Long id);
+	Optional<Category> findById(Long id);
 
 }

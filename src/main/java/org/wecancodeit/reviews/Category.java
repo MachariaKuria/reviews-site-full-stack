@@ -8,54 +8,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
 
-	@Id
-	@GeneratedValue
-	private long id;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	private String name;
-	private String imgUrl;
-	private String location;
-	
-	@ManyToMany
-	private Collection<Review> reviews;
-	
-	public Category() {
-		
-	}
-	
+    @ManyToOne
+    private Hotel hotelName;
 
-	public long getId() {
-		return id;
-	}
+	private String type;
 
-	public String getName() {
-		return name;
-	}
 
-	public String getImgUrl() {
+    public Category(){
 
-		return imgUrl;
-	}
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public Category(String type, Hotel hotelName){
+        this.type = type;
+        this.hotelName = hotelName;
 
-	public Collection<Review> getReviews() {
-		return reviews;
-	}
-
-	public Category(String name, String imgUrl, String location, Review...reviews) {
-		this.name = name;
-		this.imgUrl = imgUrl;
-		this.location = location;
-		this.reviews = new HashSet<>(Arrays.asList(reviews));	
-	}
-
+    }
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,4 +54,7 @@ public class Category {
 			return false;
 		return true;
 	}
+
+
+
 }

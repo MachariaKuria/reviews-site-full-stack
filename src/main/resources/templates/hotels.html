@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Hotels</title>
+	<link href="/styles.css" rel="stylesheet">
+</head>
+
+<body>
+	<h1>Welcome to Macharia's Hotels site</h1>
+
+	<h2>Below are Hotels for some travel destinations:</h2>
+	<div th:each="hotel: ${hotels}">
+		<li>
+			<a th:href="@{/hotel(id=${hotel.id})}" th:text="${hotel.name}"></a>
+		</li>
+	</div>
+	<nav>
+		<a href="http://localhost:8080/show-hotels">Hotels</a>
+		<a href="http://localhost:8080/show-reviews">Reviews</a>
+	</nav>
+
+	<div>
+		<footer>
+			<p>&copy; 2018 Macharia's reviews site</p>
+		</footer>
+	</div>
+</body>
+
+
+</html>

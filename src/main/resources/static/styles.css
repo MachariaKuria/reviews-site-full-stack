@@ -15,9 +15,9 @@
 			flex-flow: row; 
 			position: fixed;
 			top: 0;
-			left: 0;
-			width: 100%;
-			justify-content: center;
+			padding-left: 8rem;
+			width: 50%;
+			justify-content: flex-end;
 			background:#008000;
 		}
 		  nav a {
@@ -38,6 +38,7 @@
 		  
 		  h1 {
 		  padding-top: 10px;
+		  text-align: center;
 		  }
   
 	  img {
@@ -68,4 +69,9 @@
 			color: #fff;
 			padding: 0.5em 0.5em;
 			text-align: center;
+		}
+
+		.add-comment {
+			line-height: 1rem;
+			padding-left: 0.5rem;
 		}

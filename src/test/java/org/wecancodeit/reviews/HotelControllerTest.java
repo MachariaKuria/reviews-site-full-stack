@@ -14,59 +14,55 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
-public class CategoryControllerTest {
-
+public class HotelControllerTest {
+	
 	@InjectMocks
-	private CategoryController underTest;
+	private HotelController underTest;	
+
+	@Mock
+	private Model model;
 	
 	@Mock
-	private Category category;
-	
+	private Hotel hotel;
+
 	@Mock
-	private Category anotherCategory;
-	
-	@Mock
-	private CategoryRepository categoryRepo;
-	
-	@Mock
-	private Review review;
-	
+	private Hotel anotherHotel;
+
 	@Mock
 	private Review anotherReview;
 	
 	@Mock
-	private ReviewRepository reviewRepo;
+	private HotelRepository hotelRepo;
+
+	@Mock
+	private Review review;
 	
 	@Mock
-	private Model model;
+	private ReviewRepository reviewRepo;	
 	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		
 	}
-	
-	
+
 	@Test
-	public void shouldAddSingleCategoryToModel() throws CategoryNotFoundException {
-		
-		long arbitraryCategoryId = 1;
-		when(categoryRepo.findById(arbitraryCategoryId)).thenReturn(Optional.of(category));
-		
-		underTest.findOneCategory(arbitraryCategoryId, model);
-		verify(model).addAttribute("categories",category);
+	public void shouldAddSingleHotelToModel() throws HotelNotFoundException {
+		long hotelId = 1;
+		when(hotelRepo.findById(hotelId)).thenReturn(Optional.of(hotel));
 		
 		
+		underTest.findOneHotel(hotelId, model);
+		verify(model).addAttribute("hotels",hotel);
 	}
-	
+
 	@Test
-	public void shouldAddAllCategoriesToModel() {
+	public void shouldAddAllHotelsToModel() {
 		
-		Collection<Category> allCategories = Arrays.asList(category, anotherCategory);
-		when(categoryRepo.findAll()).thenReturn(allCategories);
+		Collection<Hotel> allHotels = Arrays.asList(hotel, anotherHotel);
+		when(hotelRepo.findAll()).thenReturn(allHotels);
 		
-		underTest.findAllCategories(model);
-		verify(model).addAttribute("categories", allCategories);
+		underTest.findAllHotels(model);
+		verify(model).addAttribute("hotels", allHotels);
 		
 	}
 	
@@ -91,4 +87,6 @@ public class CategoryControllerTest {
 		
 		verify(model).addAttribute("reviews", allReviews);
 	}
+	
+	
 }

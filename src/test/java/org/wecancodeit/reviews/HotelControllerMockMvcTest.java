@@ -20,20 +20,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoryController.class)
-public class CategoryControllerMockMvcTest {
+@WebMvcTest(HotelController.class)
+public class HotelControllerMockMvcTest {
 	
 	@Resource
 	private MockMvc mvc;
 	
 	@Mock
-	private Category category;
+	private Hotel hotel;
 
 	@Mock
-	private Category anotherCategory;
+	private Hotel anotherHotel;
 	
 	@MockBean
-	private CategoryRepository categoryRepo;
+	private HotelRepository hotelRepo;
 	
 	
 	@Mock
@@ -48,51 +48,51 @@ public class CategoryControllerMockMvcTest {
 	
 
 	@Test
-	public void shouldRouteToSingleCategoryView() throws Exception {
-		long arbitraryCategoryId = 651;
-		when(categoryRepo.findById(arbitraryCategoryId)).thenReturn(Optional.of(category));
-		mvc.perform(get("/category?id=651")).andExpect(view().name(is("category")));
+	public void shouldRouteToSingleHotelView() throws Exception {
+		long hotelId = 651;
+		when(hotelRepo.findById(hotelId)).thenReturn(Optional.of(hotel));
+		mvc.perform(get("/hotel?id=651")).andExpect(view().name(is("hotel")));
 	}
 	
 	@Test
-	public void shouldBeOkForSingleCourse() throws Exception{
-		long arbitraryCategoryId = 111;
-		when(categoryRepo.findById(arbitraryCategoryId)).thenReturn(Optional.of(category));
-		mvc.perform(get("/category?id=111")).andExpect(status().isOk());
+	public void shouldBeOkForSingleHotel() throws Exception{
+		long hotelId = 111;
+		when(hotelRepo.findById(hotelId)).thenReturn(Optional.of(hotel));
+		mvc.perform(get("/hotel?id=111")).andExpect(status().isOk());
 	}
 
 
 	@Test
-	public void shouldNotBeOkForSingleCourse() throws Exception{
-		mvc.perform(get("/category?id=45")).andExpect(status().isNotFound());
+	public void shouldNotBeOkForSingleHotel() throws Exception{
+		mvc.perform(get("/hotel?id=45")).andExpect(status().isNotFound());
 	}
 	
 	@Test
-	public void shouldPutSingleCategoryIntoModel() throws Exception {
+	public void shouldPutSingleHotelIntoModel() throws Exception {
 		
-		when(categoryRepo.findById(111L)).thenReturn(Optional.of(category));
+		when(hotelRepo.findById(111L)).thenReturn(Optional.of(hotel));
 		
-		mvc.perform(get("/category?id=111")).andExpect(model().attribute("categories", is(category)));
+		mvc.perform(get("/hotel?id=111")).andExpect(model().attribute("hotels", is(hotel)));
 	}
 	
 	@Test
-	public void shouldRouteToAllCategoriesView() throws Exception {
+	public void shouldRouteToAllHotelsView() throws Exception {
 		
-		mvc.perform(get("/show-categories")).andExpect(view().name(is("categories")));
+		mvc.perform(get("/show-hotels")).andExpect(view().name(is("hotels")));
 	}
 	
 	@Test
-	public void shouldBeOkForAllCategories() throws Exception {
-		mvc.perform(get("/show-categories")).andExpect(status().isOk());
+	public void shouldBeOkForAllHotels() throws Exception {
+		mvc.perform(get("/show-hotels")).andExpect(status().isOk());
 	}
 	
 	@Test
-	public void shouldPutAllCategoriesIntoModel() throws Exception{
-		Collection<Category> allCategories = Arrays.asList(category, anotherCategory);
+	public void shouldPutAllHotelsIntoModel() throws Exception{
+		Collection<Hotel> allHotels = Arrays.asList(hotel, anotherHotel);
 		
-		when(categoryRepo.findAll()).thenReturn(allCategories);
+		when(hotelRepo.findAll()).thenReturn(allHotels);
 		
-		mvc.perform(get("/show-categories")).andExpect(model().attribute("categories", is(allCategories)));
+		mvc.perform(get("/show-hotels")).andExpect(model().attribute("hotels", is(allHotels)));
 	}
 	
 	
